@@ -6,7 +6,7 @@
 
 A simple [Docker](https://www.docker.com/) image for [Quarto](https://quarto.org/), the scientific and technical publishing system built on [Pandoc](https://pandoc.org/).
 
-![logo](./logo-quarto-on-docker.svg){width="150px"}
+![nice silly logo for quarto-on-docker](./logo-quarto-on-docker.svg){width=100px}
 
 ## Description
 
