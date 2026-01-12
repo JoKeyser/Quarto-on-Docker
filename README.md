@@ -26,7 +26,7 @@ It is probably not very elegant or efficient, but gets the (CI/CD) job done 🤓
 You can use the built Docker image in your GitLab CI pipelines to render Quarto documents.
 (Or you can build and register your own, customized image, see [Installation](#installation) section below.)
 
-> [!NOTE]
+> [!TIP]
 > On UHH GitLab, you can use Docker images with the RRZ's shared GitLab runner.
 > To do so, in your project settings, enable the option _"Turn on instance runners for this project"_ under _Settings → CI/CD → Runners → Instance runners_.
 
@@ -46,7 +46,7 @@ build_quarto_docs:
     - quarto render
 ```
 
-> [!NOTE]
+> [!IMPORTANT]
 > On GitLab, your "target project" must authenticate with the container registry to pull the Docker image from the "image project".
 > If your "target project" is in a different namespace, you must add it (or its entire group) to the _Job token allowlist_ settings in the "image project" under _Settings → CI/CD → Job token permissions_.
 
@@ -100,7 +100,7 @@ It includes the dependencies to run Quarto to render into HTML and PDF, includin
 
 ## Roadmap
 
-- _Maybe_ publish the Dockerfile?
+- _Maybe_ publish the image on UHH's GitLab's registry?
 - _Maybe_ add support for more output formats (e.g., Word, EPUB)?
 - _Maybe_ publish the image on Docker Hub?
 - _Maybe_ add support for R and Python environments?
