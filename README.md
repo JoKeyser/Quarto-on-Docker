@@ -23,7 +23,7 @@ It is probably not very elegant or efficient, but gets the (CI/CD) job done 🤓
 
 ## Usage
 
-You can use the ready-built Docker image in your GitLab CI pipelines to render Quarto documents.
+You can use the built Docker image in your GitLab CI pipelines to render Quarto documents.
 (Or you can build and register your own, customized image, see [Installation](#installation) section below.)
 
 > [!NOTE]
@@ -53,55 +53,61 @@ build_quarto_docs:
 ## Installation
 
 > [!NOTE]
-> For using this image in GitLab CI, no installation is necessary on your local machine.
-> See [Usage](#usage) section for details.
-> Only proceed with the steps below if you want to build and test the image locally.
+> To use this image in GitLab CI, no installation is necessary on your local machine, see [Usage](#usage) section for details.
+> Only proceed with the steps below if you want to build the image locally.
 
-On your local machine, make sure you have [Docker](https://www.docker.com/) installed.
+0. Make sure you have [Docker](https://www.docker.com/) installed.
+1. Clone or copy this repository.
+2. Build the Docker image with the following command:
 
-Then, clone/copy this repository and build the Docker image locally with the following command:
+   ```sh
+   docker build -t MY-IMAGE-NAME:my-tag .
+   ```
 
-```sh
-docker build -t quarto-on-docker:latest .
-```
+   Note to tag the image, you should change the `-t` argument accordingly.
+   For example, if you want to push the image to a GitLab container registry, you have to tag it with the appropriate URL, e.g., like this:
 
-If the build succeeds, you can locally test the image with `quarto check` command; it should print the installed Quarto version and some system information:
+   ```sh
+   docker build -t gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:latest .
+   ```
 
-```sh
-docker run --rm -it quarto-on-docker:latest quarto check
-```
+3. If the build succeeds, you can locally test the image by running the `quarto check`.
+   It should print the installed Quarto version and some system information.
 
-If all works fine, you can publish your image on GitLab's container registry.
-Note that you need to be logged in to GitLab's container registry (e.g., via `docker login`).
-Make sure to replace `bbf2281` with your own UHH user ID, or the appropriate group ID and project path.
-Here an example command to tag and push the image:
+   ```sh
+   docker run --rm -it MY-IMAGE-NAME:my-tag quarto check
+   ```
 
-```sh
-docker push gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:latest
-```
+4. If all works fine, you can publish your image on GitLab's container registry.
+   Note that you need to be logged in to GitLab's container registry (e.g., via `docker login`).
+   Make sure to replace `bbf2281` with your own UHH user ID, or the appropriate group ID and project path.
+   Here an example command to tag and push the image:
+
+   ```sh
+   docker push gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:latest
+   ```
 
 Now you can use the built image in your GitLab CI pipelines as described in the [Usage](#usage) section.
 
 ## Support
 
-This image was built on Ubuntu 24.04 and tested on GitLab CI.
+This image was built on Ubuntu 24.04 and tested on GitLab CI with the Docker executor.
 
-It includes the dependencies to run Quarto for documentation rendered as HTML and PDF, including SVG images.
+It includes the dependencies to run Quarto to render into HTML and PDF, including SVG images.
 
 > [!TIP]
 > You can locally test your GitLab CI configuration with [GitLab-CI-Local](https://github.com/firecow/gitlab-ci-local).
 
 ## Roadmap
 
-- Publish the Dockerfile.
-- Document usage.
+- _Maybe_ publish the Dockerfile?
 - _Maybe_ add support for more output formats (e.g., Word, EPUB)?
 - _Maybe_ publish the image on Docker Hub?
 - _Maybe_ add support for R and Python environments?
 
 ## Contributing
 
-Contributions are welcome!
+Contributions are welcome.
 Feel free to open issues and submit pull requests, either [on GitHub](https://github.com/JoKeyser/Quarto-on-Docker) or [UHH's GitLab instance](gitlab.rrz.uni-hamburg.de/bbf2281/quarto-on-docker).
 
 ## Authors
