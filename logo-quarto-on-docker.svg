@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 756.26 756.25998"
+   version="1.1"
+   sodipodi:docname="logo-quarto-on-docker.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xml:space="preserve"
+   width="756.26001"
+   height="756.26001"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview9"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="0.39537609"
+     inkscape:cx="194.75128"
+     inkscape:cy="373.06252"
+     inkscape:window-width="1180"
+     inkscape:window-height="708"
+     inkscape:window-x="736"
+     inkscape:window-y="333"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" /><defs
+     id="defs4"><style
+       id="style2">
+      .cls-1 {
+        fill: #1d63ed;
+        stroke-width: 0px;
+      }
+    </style><clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1271"><path
+         d="M 0,396 H 612 V 0 H 0 Z"
+         id="path1269" /></clipPath></defs><path
+     d="m 376.88174,259.7535 -39.18069,146.22431 c 80.40742,16.97531 161.244,-28.57567 187.74507,-106.12131 L 376.80792,260.02901 Z M 357.15078,254.46661 211.18885,215.35623 C 195.91023,294.78406 241.3522,373.876 317.83872,400.07921 l 39.03656,-145.68642 z m 25.03448,-14.45367 148.88747,39.89428 C 548.25895,198.71267 500.9892,116.83904 422.06642,91.121949 Z M 362.44119,234.72253 402.33547,85.835059 C 321.59574,70.204919 241.72914,117.43596 216.21337,195.55496 Z"
+     id="path982-3"
+     style="fill:#7fb8db;fill-opacity:1;stroke-width:13.5817" /><path
+     class="cls-1"
+     d="m 743.96,314.15829 c -18.54,-12.48 -67.26,-17.81 -102.68,-8.27 -1.91,-35.28 -20.1,-65.01 -53.38,-90.95 l -12.32,-8.27 -8.21,12.4 c -16.14,24.5 -22.94,57.14 -20.53,86.81 1.9,18.28 8.26,38.83 20.53,53.74 -203.73547,40.74506 -322.78197,20.67 -567.31,20.67 -0.85,42.49 5.98,124.23 57.96,190.77 5.74,7.35 12.04,14.46 18.87,21.31 42.26,42.32 106.11,73.35 201.59,73.44 145.66,0.13 270.46,-78.6 346.37,-268.97 24.98,0.41 90.92,4.48 123.19,-57.88 0.79,-1.05 8.21,-16.54 8.21,-16.54 l -12.3,-8.27 z m -554.29,-38.86 h -81.7 v 81.7 h 81.7 z m -105.55,0 H 2.42 v 81.7 h 81.7 z m 105.55,-103.19 h -81.7 v 81.7 h 81.7 z"
+     id="path6"
+     sodipodi:nodetypes="ccccccccccccccccccccccccccccccc"
+     style="fill:#004e81;fill-opacity:1" /></svg>
