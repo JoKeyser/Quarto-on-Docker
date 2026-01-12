@@ -10,27 +10,47 @@ A simple [Docker](https://www.docker.com/) image for [Quarto](https://quarto.org
 
 ## Description
 
-This project describes a Docker image that runs Quarto in a containerized environment.
-It is primarily intended for use in continuous integration (CI) pipelines.
+This project [describes a Docker image](./Dockerfile) that runs Quarto in a containerized environment.
+It is intended for use in continuous integration/continuous deployment (CI/CD).
 
-This image is simply (and probably not elegantly nor efficiently) based on a Debian image with the official Quarto installation.
+This image is simply based on a Debian image with the official Quarto installation.
 It includes all necessary dependencies to run Quarto for documentation rendered as HTML and PDF, including SVG images.
+It is probably not very elegant or efficient, but gets the (CI/CD) job done 🤓.
 
 > [!NOTE]
 > This image does not (yet?) include any programming environment such as R or Python.
 > This may be added in the future, depending on our own demand.
 
-## Installation
-
-TODO
-
 ## Usage
 
 TODO
 
+## Installation
+
+> [!NOTE]
+> For using this image in GitLab CI, no installation is necessary on your local machine.
+> See [Usage](#usage) section for details.
+> Only proceed with the steps below if you want to build and test the image locally.
+
+On your local machine, make sure you have [Docker](https://www.docker.com/) installed.
+
+Then, clone/copy this repository and build the Docker image locally with the following command:
+
+```sh
+docker build -t quarto-on-docker:latest .
+```
+
+If the build succeeds, you can locally test the image with:
+
+```sh
+docker run --rm -it quarto-on-docker:latest quarto check
+```
+
+This should print the installed Quarto version and some system information.
+
 ## Support
 
-This image is tested on GitLab CI.
+This image was built on Ubuntu 24.04 and tested on GitLab CI.
 
 It includes the dependencies to run Quarto for documentation rendered as HTML and PDF, including SVG images.
 
@@ -52,7 +72,7 @@ Feel free to open issues and submit pull requests, either [on GitHub](https://gi
 
 ## Authors
 
-- Johannes Keyser
+- Johannes Keyser <johannes.keyser@uni-hamburg.de>
 
 ## License
 
