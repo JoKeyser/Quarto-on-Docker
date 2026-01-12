@@ -23,7 +23,31 @@ It is probably not very elegant or efficient, but gets the (CI/CD) job done 🤓
 
 ## Usage
 
-TODO
+You can use the ready-built Docker image in your GitLab CI pipelines to render Quarto documents.
+(Or you can build and register your own, customized image, see [Installation](#installation) section below.)
+
+> [!NOTE]
+> On UHH GitLab, you can use Docker images with the RRZ's shared GitLab runner.
+> To do so, in your project settings, enable the option _"Turn on instance runners for this project"_ under _Settings → CI/CD → Runners → Instance runners_.
+
+To avoid confusion, let's call the project where you want to use Quarto the _"target project"_, and the project where the built/registered Docker image is hosted the _"image project"_.
+
+In the "target project", specify the image in your `.gitlab-ci.yml` file, pointing to the URL and tag of the Docker image registered in the "image project".
+For example, with this project hosted on UHH's GitLab instance, you can use a configuration like this:
+
+```yaml
+image: gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:latest
+# NOTE: Replace bbf2281 with your own UHH user ID, or the appropriate group ID and project path.
+stages:
+  - build
+build_quarto_docs:
+  stage: build
+  script:
+    - quarto render
+```
+
+> [!NOTE] In GitLab, to pull the Docker image from the "image project", your target project's must authenticate with the container registry of the "image project".
+> If your "target project" is in a different namespace, you must add it (or its entire group) to the _Job token allowlist_ settings in the "image project" under _Settings → CI/CD → Job token permissions_.
 
 ## Installation
 
@@ -40,13 +64,22 @@ Then, clone/copy this repository and build the Docker image locally with the fol
 docker build -t quarto-on-docker:latest .
 ```
 
-If the build succeeds, you can locally test the image with:
+If the build succeeds, you can locally test the image with `quarto check` command; it should print the installed Quarto version and some system information:
 
 ```sh
 docker run --rm -it quarto-on-docker:latest quarto check
 ```
 
-This should print the installed Quarto version and some system information.
+If all works fine, you can publish your image on GitLab's container registry.
+Note that you need to be logged in to GitLab's container registry (e.g., via `docker login`).
+Make sure to replace `bbf2281` with your own UHH user ID, or the appropriate group ID and project path.
+Here an example command to tag and push the image:
+
+```sh
+docker push gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:latest
+```
+
+Now you can use the image in your GitLab CI pipelines as described in the [Usage](#usage) section.
 
 ## Support
 
