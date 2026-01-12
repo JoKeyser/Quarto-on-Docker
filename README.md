@@ -32,12 +32,12 @@ You can use the ready-built Docker image in your GitLab CI pipelines to render Q
 
 To avoid confusion, let's call the project where you want to use Quarto the _"target project"_, and the project where the built/registered Docker image is hosted the _"image project"_.
 
-In the "target project", specify the image in your `.gitlab-ci.yml` file, pointing to the URL and tag of the Docker image registered in the "image project".
-For example, with this project hosted on UHH's GitLab instance, you can use a configuration like this:
+In the "target project", specify the Docker image in your `.gitlab-ci.yml` file, pointing to the image's URL registered in the "image project".
+For example, with a project hosted on UHH's GitLab instance, you can use a configuration like this:
 
 ```yaml
 image: gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:latest
-# NOTE: Replace bbf2281 with your own UHH user ID, or the appropriate group ID and project path.
+# NOTE: Replace bbf2281 with your own UHH user ID, or the appropriate group ID and project path, as configured during the image registration, see Installation section.
 stages:
   - build
 build_quarto_docs:
@@ -46,7 +46,8 @@ build_quarto_docs:
     - quarto render
 ```
 
-> [!NOTE] In GitLab, to pull the Docker image from the "image project", your target project's must authenticate with the container registry of the "image project".
+> [!NOTE]
+> On GitLab, your "target project" must authenticate with the container registry to pull the Docker image from the "image project".
 > If your "target project" is in a different namespace, you must add it (or its entire group) to the _Job token allowlist_ settings in the "image project" under _Settings → CI/CD → Job token permissions_.
 
 ## Installation
@@ -79,7 +80,7 @@ Here an example command to tag and push the image:
 docker push gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:latest
 ```
 
-Now you can use the image in your GitLab CI pipelines as described in the [Usage](#usage) section.
+Now you can use the built image in your GitLab CI pipelines as described in the [Usage](#usage) section.
 
 ## Support
 
