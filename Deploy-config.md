@@ -37,7 +37,11 @@ For enhanced security, you can restrict the key to only allow `rsync` commands b
 For example, to restrict access to `rrsync` (restricted `rsync`), add a line like this to your deploy user's `~/.ssh/authorized_keys` file, e.g. using `/var/www` as the only valid target directory for deployment:
 
 ```txt
-command="rrsync -wo /var/www" ssh-ed25519 AAAAC3NzaC1...
+command="rrsync -wo /var/www/" ssh-ed25519 AAAAC3NzaC1...
 ```
 
 Option `-wo` specifies write-only access for `rsync` from the client side; without that option, the client could also read files from the server, which is unnecessary and potentially insecure.
+
+> [!IMPORTANT]
+> Note that `rrsync` is picky about the target directory path.
+> In the example above, the path ends with a slash (`/var/www/`), so the call of `rsync` in the GitLab CI job starts relative to that path (i.e., `./_site/` is copied into `/var/www/`).

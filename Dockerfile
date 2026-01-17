@@ -18,6 +18,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       rsync \
     && rm -rf /var/lib/apt/lists/*
 
+# Install glab
+RUN curl -fsSL -o /tmp/glab.deb "https://gitlab.com/gitlab-org/cli/-/releases/v1.80.4/downloads/glab_1.80.4_linux_amd64.deb" \
+    && apt-get update \
+    && apt-get install -y /tmp/glab.deb \
+    && rm /tmp/glab.deb \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install Quarto, based on official instructions
 # at <https://docs.posit.co/resources/install-quarto.html>
 RUN mkdir -p /opt/quarto/${QUARTO_VERSION} \
