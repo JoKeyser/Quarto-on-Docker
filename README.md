@@ -50,6 +50,10 @@ build_quarto_docs:
 > On GitLab, your "target project" must authenticate with the container registry to pull the Docker image from the "image project".
 > If your "target project" is in a different namespace, you must add it (or its entire group) to the _Job token allowlist_ settings in the "image project" under _Settings → CI/CD → Job token permissions_.
 
+### Deploy configuration
+
+Please refer to the file [Deploy-config.md](./Deploy-config.md) for example configuration on how to deploy the rendered Quarto documents to a server via `rsync` over SSH.
+
 ## Installation
 
 > [!NOTE]

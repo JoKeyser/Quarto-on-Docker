@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       tar \
       librsvg2-bin \
       ca-certificates \
+      ssh \
+      rsync \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Quarto, based on official instructions
