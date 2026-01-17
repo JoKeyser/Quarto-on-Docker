@@ -104,6 +104,7 @@ It includes the dependencies to run Quarto to render into HTML and PDF, includin
 
 ## Roadmap
 
+- Improve description of a working CI/CD config, including `glab` and `rsync`.
 - _Maybe_ publish the image on UHH's GitLab's registry?
 - _Maybe_ add support for more output formats (e.g., Word, EPUB)?
 - _Maybe_ publish the image on Docker Hub?
