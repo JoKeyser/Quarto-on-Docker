@@ -1,0 +1,73 @@
+# PURPOSE: Example pipeline to render and deploy a Quarto example book.
+# AUTHORS: Johannes Keyser
+# LICENSE: CC0 1.0 public domain dedication; no rights reserved.
+# SUMMARY: This GitLab CI/CD pipeline uses Docker to convert source files
+#          written in Markdown into a static website, and then copies those
+#          outputs to a web server using rsync (over SSH).
+#          The Docker image must include Quarto, the glab CLI tool, and rsync.
+#          The build stage builds the site by rendering the Quarto project,
+#          temporarily storing the output in GitLab's CI/CD cache.
+#          If on Git branch "main", the deploy stage uses glab to download
+#          an SSH private key and known host keys from GitLab Secure Files.
+#          It uses the known SSH keys to connect to the web server and copy the
+#          rendered Quarto output using rsync.
+# USAGE: Adapt this example to your own Quarto project and deployment environment.
+#        Make sure to set up the necessary SSH keys and known host keys in
+#        GitLab Secure Files, and to configure the deploy job's variables,
+#        namely DEPLOY_HOST, DEPLOY_PATH, SECURE_FILE_NAME, and DEPLOY_USER.
+
+default:
+  image: gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image
+  # NOTE: Replace "bbf2281" with your own UHH user ID,
+  #       or the appropriate group ID and project path,
+  #       as configured during the image registration.
+
+stages:  # list of stages for jobs, and their order of execution
+  - build
+  - deploy
+
+build-job:  # this job runs in the build stage, which runs first.
+  stage: build
+  script:
+    - echo "Start rendering the shared EEG-lab-guide site using Quarto..."
+    - quarto render
+    - echo "Quarto rendering complete, output in quarto-output/"
+  cache:
+    key: "quarto-output"
+    paths:
+      - quarto-output/  # NOTE: Must match with _quarto.yml output-dir
+
+deploy-job:  # this job runs in the deploy stage
+  stage: deploy
+  needs: ["build-job"]
+  only:
+    - main  # run this job only on the "main" Git branch
+  variables:
+    # TODO: Set "DEPLOY_" variables according to your configuration of server and GitLab Secure Files
+    DEPLOY_HOST: "someserver.rrz.uni-hamburg.de"
+    DEPLOY_PATH: example-book/  # path relative to ssh key's rrsync config, e.g. /var/www/example-book/ 
+    DEPLOY_KEY_NAME: id-deploy-ssh-key  # file name as set in GitLab UI
+    DEPLOY_USER: "RRZ-username"  # user for SSH deployment
+  environment: production
+  cache:
+    key: "quarto-output"
+    paths:
+      - quarto-output/  # NOTE: Must match with _quarto.yml output-dir
+  script:
+    # create the conventional SSH folder
+    - mkdir -p ~/.ssh
+    # authenticate with GitLab to download the SSH key
+    - glab auth login --job-token $CI_JOB_TOKEN --hostname $CI_SERVER_FQDN --api-protocol $CI_SERVER_PROTOCOL
+    # download the SSH private key for deployment from GitLab Secure Files
+    - glab -R $CI_PROJECT_PATH securefile download --name $DEPLOY_KEY_NAME --path=id_rsa
+    # move the key to the SSH folder and set permissions to read/write for user only
+    - mv $CI_PROJECT_DIR/id_rsa ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    # download the expected host SSH keys
+    # (created "ssh-keyscan -H $DEPLOY_HOST > known-host-keys" and uploaded to GitLab Secure Files)
+    - glab -R $CI_PROJECT_PATH securefile download --name known-host-keys --path=known-host-keys
+    # move the known hosts file to the SSH folder
+    - mv $CI_PROJECT_DIR/known-host-keys ~/.ssh/known_hosts
+    # copy the rendered Quarto output using rsync over SSH
+    - rsync -e "ssh -i ~/.ssh/id_rsa" -avz --delete quarto-output/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH"
+    - echo "Deployment complete."

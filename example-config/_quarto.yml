@@ -1,0 +1,18 @@
+project:
+  type: book
+  output-dir: quarto-output  # NOTE: Must match with .gitlab-ci.yml
+
+book:
+  title: "Example book"
+  author: "Example author"
+  chapters:
+    - index.qmd
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+  pdf:
+    documentclass: scrreprt
+    papersize: a4
