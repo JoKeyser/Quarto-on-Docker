@@ -23,7 +23,7 @@ It is probably not very elegant or efficient, but gets the (CI/CD) job done 🤓
 
 ## Usage
 
-You can use the built Docker image in your GitLab CI pipelines to render Quarto documents.
+You can use the already-built Docker image in your GitLab CI pipelines to render Quarto documents.
 (Or you can build and register your own, customized image, see [Installation](#installation) section below.)
 
 > [!TIP]
@@ -57,7 +57,7 @@ For an example configuration for hosting on UHH's GitLab instance, see folder [e
    For example, if you want to push the image to a GitLab container registry, you have to tag it with the appropriate URL, e.g., like this:
 
    ```sh
-   docker build -t gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:latest .
+   docker build -t gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:my-tag .
    ```
 
 3. If the build succeeds, you can locally test the image by running the `quarto check`.
@@ -73,7 +73,7 @@ For an example configuration for hosting on UHH's GitLab instance, see folder [e
    Here an example command to tag and push the image:
 
    ```sh
-   docker push gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:latest
+   docker push gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image:my-tag
    ```
 
 Now you can use the built image in your GitLab CI pipelines as described in the [Usage](#usage) section.
@@ -89,7 +89,6 @@ It includes the dependencies to run Quarto to render into HTML and PDF, includin
 
 ## Roadmap
 
-- Improve description of a working CI/CD config, including `glab` and `rsync`.
 - _Maybe_ publish the image on UHH's GitLab's registry?
 - _Maybe_ add support for more output formats (e.g., Word, EPUB)?
 - _Maybe_ publish the image on Docker Hub?

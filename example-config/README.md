@@ -1,4 +1,4 @@
-# Configuration example for RRZ GitLab
+# Configuration example for GitLab
 
 This Docker image is intended for use in GitLab CI/CD pipelines.
 You can adapt it to your own Quarto documents and your specific use case and target environment.
@@ -9,8 +9,14 @@ For more deployment methods, please refer to <https://quarto.org/docs/publishing
 
 ## Configuration of GitLab CI
 
-In your target project's `.gitlab-ci.yml` file, you can specify the stages and jobs for building and deploying your Quarto documents.
-See the example configuration in [.gitlab-ci.yml](.gitlab-ci.yml) for details.
+Generally, you can specify arbitrary steps in your GitLab CI pipeline how to use the Quarto Docker image.
+The example configuration in [.gitlab-ci.yml](.gitlab-ci.yml) separates two stages:
+
+1. The `build` job uses the Quarto Docker image to render the Quarto documents, according to the target project's [`_quarto.yml`](_quarto.yml) configuration.
+2. The `deploy` job then uses `rsync` over SSH to deploy the rendered documents to a web server.
+
+To authenticate with the server, the `deploy` job uses an SSH private key stored in GitLab CI/CD variables.
+The example assumes that the server has `rrsync` installed, which provides slightly enhanced security for `rsync` over SSH, see [Configuration on the deploy server](#configuration-on-the-deploy-server) section below for details.
 
 ## Configuration on the deploy server
 
@@ -20,7 +26,7 @@ For enhanced security, you can restrict the SSH key to only allow only specific 
 > [!TIP]
 > If your deploy user has `bash` as their shell, you may want to change that to a simpler shell, e.g. `dash`, see ["Bash Security Issue" section in the `rrsync` documentation](https://download.samba.org/pub/rsync/rrsync.1#BASH_SECURITY_ISSUE).
 
-To restrict the SSH key's access to only `rrsync` (restricted `rsync`), add a line like this to your deploy user's `~/.ssh/authorized_keys` file, e.g. using `/var/www/` as the only valid target directory for deployment:
+To restrict the SSH key's access to only `rrsync` ("restricted `rsync`"), add a line like this to your deploy user's `~/.ssh/authorized_keys` file, e.g. using `/var/www/` as the only valid target directory for deployment:
 
 ```txt
 command="rrsync -wo /var/www/" ssh-ed25519 AAAAC3NzaC1...
