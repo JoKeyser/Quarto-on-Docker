@@ -1,4 +1,5 @@
 <!--
+  PURPOSE: Main README for the Quarto on Docker project.
   SPDX-FileCopyrightText: 2026 Johannes Keyser
   SPDX-License-Identifier: CC0-1.0
 -->

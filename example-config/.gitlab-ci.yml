@@ -15,6 +15,9 @@
 #        Make sure to set up the necessary SSH keys and known host keys in
 #        GitLab Secure Files, and to configure the deploy job's variables,
 #        namely DEPLOY_HOST, DEPLOY_PATH, SECURE_FILE_NAME, and DEPLOY_USER.
+#
+# SPDX-FileCopyrightText: 2026 Johannes Keyser <johannes.keyser@uni-hamburg.de>
+# SPDX-License-Identifier: CC0-1.0
 
 default:
   image: gitlab.rrz.uni-hamburg.de:4567/bbf2281/quarto-on-docker/image

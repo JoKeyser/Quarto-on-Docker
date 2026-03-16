@@ -1,3 +1,9 @@
+<!--
+PURPOSE: Simple Quarto document to test the example configuration.
+SPDX-FileCopyrightText: 2026 Johannes Keyser <johannes.keyser@uni-hamburg.de>
+SPDX-License-Identifier: CC0-1.0
+-->
+
 # Example heading
 
 Some example text for the example book.

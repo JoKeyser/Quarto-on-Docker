@@ -1,6 +1,8 @@
 # PURPOSE: A simple Docker image to use Quarto in CI/CD pipelines.
 # AUTHORS: Johannes Keyser <johannes.keyser@uni-hamburg.de>
 # LICENSE: CC0-1.0 (Creative Commons Zero v1.0 Universal)
+# SPDX-FileCopyrightText: 2026 Johannes Keyser <johannes.keyser@uni-hamburg.de>
+# SPDX-License-Identifier: CC0-1.0
 
 FROM debian:trixie-slim
 

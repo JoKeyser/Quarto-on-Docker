@@ -1,3 +1,9 @@
+<!--
+PUPOSE: Example configuration for GitLab CI/CD pipelines using the Quarto Docker image.
+SPDX-FileCopyrightText: 2026 Johannes Keyser <johannes.keyser@uni-hamburg.de>
+SPDX-License-Identifier: CC0-1.0
+-->
+
 # Configuration example for GitLab
 
 This Docker image is intended for use in GitLab CI/CD pipelines.
