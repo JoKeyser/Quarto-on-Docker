@@ -6,7 +6,8 @@
 
 FROM debian:trixie-slim
 
-ARG QUARTO_VERSION=1.8.26
+ARG QUARTO_VERSION=1.8.27
+ARG GLAB_VERSION=1.89.0
 
 # Install required tools;
 # note librsvg2-bin for SVG to PDF conversion
@@ -21,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install glab
-RUN curl -fsSL -o /tmp/glab.deb "https://gitlab.com/gitlab-org/cli/-/releases/v1.80.4/downloads/glab_1.80.4_linux_amd64.deb" \
+RUN curl -fsSL -o /tmp/glab.deb "https://gitlab.com/gitlab-org/cli/-/releases/v${GLAB_VERSION}/downloads/glab_${GLAB_VERSION}_linux_amd64.deb" \
     && apt-get update \
     && apt-get install -y /tmp/glab.deb \
     && rm /tmp/glab.deb \
