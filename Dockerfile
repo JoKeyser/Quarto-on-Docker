@@ -6,8 +6,8 @@
 
 FROM debian:trixie-slim
 
-ARG QUARTO_VERSION=1.9.36
-ARG GLAB_VERSION=1.90.0
+ARG QUARTO_VERSION=1.9.37
+ARG GLAB_VERSION=1.92.1
 
 # Install required tools;
 # note librsvg2-bin for SVG to PDF conversion
@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       bash \
       curl \
       tar \
+      xz-utils \
       librsvg2-bin \
       ca-certificates \
       ssh \
@@ -28,18 +29,14 @@ RUN curl -fsSL -o /tmp/glab.deb "https://gitlab.com/gitlab-org/cli/-/releases/v$
     && rm /tmp/glab.deb \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Quarto, based on official instructions
-# at <https://docs.posit.co/resources/install-quarto.html>
-RUN mkdir -p /opt/quarto/${QUARTO_VERSION} \
-    && curl -fsSL -o /tmp/quarto.tar.gz \
-	 "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.tar.gz" \
-    && tar -xzf /tmp/quarto.tar.gz \
-       -C "/opt/quarto/${QUARTO_VERSION}" \
-       --strip-components=1 \
-    && rm /tmp/quarto.tar.gz \
-    && ln -s /opt/quarto/${QUARTO_VERSION}/bin/quarto /usr/local/bin/quarto
+# Install Quarto using the Debian package from GitHub releases.
+RUN curl -fsSL -o /tmp/quarto.deb "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb" \
+    && apt-get update \
+    && apt-get install -y /tmp/quarto.deb \
+    && rm /tmp/quarto.deb \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install TinyTeX for PDF output
+# Install TinyTeX for LaTeX PDF output (note that Typst comes bundled with Quarto).
 RUN quarto install tinytex
 
 ENV PATH="/opt/quarto/${QUARTO_VERSION}/bin:${PATH}"
