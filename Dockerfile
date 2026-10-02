@@ -7,7 +7,7 @@
 FROM debian:trixie-slim
 
 ARG QUARTO_VERSION=1.10.18
-ARG GLAB_VERSION=1.109.0
+ARG GLAB_VERSION=1.120.0
 
 # Install required tools;
 # note librsvg2-bin for SVG to PDF conversion
