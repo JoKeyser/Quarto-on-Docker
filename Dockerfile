@@ -6,7 +6,7 @@
 
 FROM debian:trixie-slim
 
-ARG QUARTO_VERSION=1.10.18
+ARG QUARTO_VERSION=1.10.19
 ARG GLAB_VERSION=1.120.0
 
 # Install required tools;
