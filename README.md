@@ -16,6 +16,7 @@ It is intended for use in continuous integration/continuous deployment (CI/CD).
 
 This image is simply based on a Debian image with the official Quarto installation.
 It includes all necessary dependencies to run Quarto for documentation rendered as HTML and PDF, including SVG images.
+For PDF output, use Quarto's bundled [Typst](https://quarto.org/docs/output-formats/typst.html) (`format: typst`); LaTeX is not included.
 It is probably not very elegant or efficient, but gets the (CI/CD) job done 🤓.
 
 > [!NOTE]
@@ -84,7 +85,7 @@ Now you can use the built image in your GitLab CI pipelines as described in the 
 
 This image was built on Ubuntu 24.04 and tested on GitLab CI with the Docker executor.
 
-It includes the dependencies to run Quarto to render into HTML and PDF, including SVG images.
+It includes the dependencies to run Quarto to render into HTML and PDF (via Typst), including SVG images.
 
 > [!TIP]
 > You can locally test your GitLab CI configuration with [GitLab-CI-Local](https://github.com/firecow/gitlab-ci-local).

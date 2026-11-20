@@ -45,8 +45,7 @@ RUN curl -fsSL -o /tmp/quarto.deb "https://github.com/quarto-dev/quarto-cli/rele
     && rm /tmp/quarto.deb \
     && rm -rf /var/lib/apt/lists/*
 
-# Install TinyTeX for LaTeX PDF output (note that Typst comes bundled with Quarto).
-RUN quarto install tinytex
+# NOTE: No LaTeX/TinyTeX; render PDFs with Typst, which comes bundled with Quarto.
 
 ENV PATH="/opt/quarto/${QUARTO_VERSION}/bin:${PATH}"
 
