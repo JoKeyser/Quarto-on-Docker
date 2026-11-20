@@ -19,7 +19,8 @@ It includes all necessary dependencies to run Quarto for documentation rendered 
 It is probably not very elegant or efficient, but gets the (CI/CD) job done 🤓.
 
 > [!NOTE]
-> This image does not (yet?) include any programming environment such as R or Python.
+> This image does not (yet?) include any programming environment such as R or Jupyter for executing code cells.
+> It only includes a plain `python3` (standard library only) for helper scripts in CI jobs.
 > This may be added in the future, depending on our own demand.
 
 ## Usage
@@ -93,7 +94,7 @@ It includes the dependencies to run Quarto to render into HTML and PDF, includin
 - _Maybe_ publish the image on UHH's GitLab's registry?
 - _Maybe_ add support for more output formats (e.g., Word, EPUB)?
 - _Maybe_ publish the image on Docker Hub?
-- _Maybe_ add support for R and Python environments?
+- _Maybe_ add support for R and Python (Jupyter) environments to execute code cells?
 
 ## Contributing
 

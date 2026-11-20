@@ -10,7 +10,8 @@ ARG QUARTO_VERSION=1.11.9
 ARG GLAB_VERSION=1.128.0
 
 # Install required tools;
-# note librsvg2-bin for SVG to PDF conversion
+# note librsvg2-bin for SVG to PDF conversion,
+# and python3 for helper scripts in CI jobs (not for Python code cells)
 RUN apt-get update && apt-get install -y --no-install-recommends \
       bash \
       curl \
@@ -20,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates \
       ssh \
       rsync \
+      python3 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install glab
